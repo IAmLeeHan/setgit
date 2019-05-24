@@ -15,17 +15,17 @@
         <div class="father">
             <p>我是father</p>
             <hr>
-            <son :num="num"></son>
+            <son :num = "num"></son>
         </div>
     </template>
    
     <template id="son">
         <div class="son">
-            <p>我是son====> {{num+1}}</p>
+            <p>我是son ===> {{num + 1}}</p>
         </div>
     </template>
 </body>
-<script src="./base/vue.js"></script>
+<script src="./js/vue.js"></script>
 
 <script>
     // props的值可以是对象，在里面可以对父组件传过来的数据做出验证，
@@ -42,24 +42,15 @@
                 template:"#father",
                 data(){
                     return {
-                        num:40
+                        num:"10"
                     }
                 },
                 components:{
                     son:{
                         template:"#son",
-                        //props:["num"]  希望接受到的值，并且可以对其进行验证
+                        // props:["num"]
                         props:{
-                            //num:[Number,String] 
-                            // num:{
-                            //     default:1000
-                            // }
-                            num:{
-                                type:Number,
-                                validator(val){
-                                    return val>5
-                                }
-                            }
+                            num:Number//[Number,String]
                         }
                     }
                 }
