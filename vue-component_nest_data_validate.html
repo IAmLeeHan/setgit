@@ -42,7 +42,7 @@
                 template:"#father",
                 data(){
                     return {
-                        num:"10"
+                        num:1
                     }
                 },
                 components:{
@@ -50,7 +50,16 @@
                         template:"#son",
                         // props:["num"]
                         props:{
-                            num:Number//[Number,String]
+                            // num:Number//[Number,String]
+                            /* num:{
+                                default:1000
+                            } */
+                            num:{
+                                type:[Number],
+                                validator(val){
+                                    return val > 5
+                                }
+                            }
                         }
                     }
                 }
