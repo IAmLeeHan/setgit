@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <aaa>
+            <h3 slot = "s1">暗红色的开发哈迪斯</h3>
+            <p slot = "s2">复活卡实践活动付款啦</p>
+        </aaa>
+    </div>
+
+    <template id = "aaa">
+        <div class = "aaa">
+            <slot name = "s1"></slot>
+            <p>我是aaa组件！</p>
+            <slot name = "s2"></slot>
+        </div>
+    </template>
+    
+</body>
+<script src="./js/vue.js"></script>
+
+<script>
+
+   //在组件标签内部写入的内容默认的会被替换掉，
+   //如果想要在组件的模板里使用这些内容，
+   //就在对应的位置写上slot标签，这个slot标签就代表着这些内容
+   //slot  插槽    匿名   具名槽口
+
+    Vue.component("aaa",{
+        template:"#aaa",
+
+    })
+
+
+
+    new Vue({
+        el:"#app",
+    })
+
+
+    
+
+
+
+</script>
+</html>
