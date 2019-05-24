@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <aaa></aaa>
+    </div>
+
+    <template id="aaa">
+        <div>
+          <input type="text" v-model="msg">
+          <p>A组件</p>
+          <hr/>
+          <bbb :msg = "msg"></bbb>
+        </div>
+    </template>
+
+
+    <template id="bbb">
+        <div>  
+            <input type="text" v-model = "ownMessage">
+        </div>
+    </template>
+</body>
+<script src="./js/vue.js"></script>
+
+<script>
+    // 组件、实例对象上有这样的属性：$parent,$children,$root,
+    //这样的话，就形成了viewmodel链(关系链)，理论上来说，
+    //任何两个组件之间的数据都可以互相调用，获取
+    //缺点：太乱了 this.$root.$children[3].$children[4]....
+  
+
+    Vue.component("aaa",{
+        template:"#aaa",
+        data(){
+            return {
+                msg:"hello"
+            }
+        }
+    })
+
+    Vue.component("bbb",{
+        template:"#bbb",
+        props:["msg"],
+        computed: {
+            ownMessage:{
+                get(){
+                    return this.msg;
+                },
+                set(val){
+                    //希望父组件的msg进行改变！数据只能由组件自身进行修改！
+                    this.$parent.msg = val;
+
+                }
+            }
+        },
+        
+    })
+
+
+    var vm = new Vue({
+        el:"#app"
+    })
+    
+    
+
+
+</script>
+</html>
