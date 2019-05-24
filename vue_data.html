@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "app">
+        <p>{{msg}}</p>
+        <p>{{num}}</p>
+        <p>{{bool}}</p>
+        <p>{{und}}</p>
+        <p>{{nulls}}</p>
+        <p>{{fn()}}</p>
+        <p>{{arr}}</p>
+        <p>{{num+1}}</p>
+        <p>{{und+1}}</p>
+        <p>{{3>2?"大于":"小于"}}</p><!-- 支持简单的三目运算符 -->
+    </div>
+    <script src = "js/vue.js"></script>
+    <script>
+        // 实例data里的数据类型可以是任意类型
+        // {{}}里只能写表达式
+        new Vue({
+            el:"#app",//挂载点
+            data:{
+                msg:"hello world",
+                num:2,
+                bool:false,
+                und:undefined,//undefind不会显示
+                nulls:null,//null不会显示
+                fn:function(){return 3},
+                arr:[1,2,3]
+            }
+        })
+    </script>
+</body>
+</html>

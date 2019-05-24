@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src = "js/vue.js"></script>
+</head>
+<body>
+    <div id = "app">
+        <button @click ="comp = (comp === 'my-a' ? 'my-b' : 'my-a') ">切换组件</button>
+        <component :is = "comp"></component>
+        <!-- component不会被解析 会替换成组件里的标签 -->
+    </div>
+    <script>
+        Vue.component("my-a",{
+            template:"<p>my-a组件</p>"
+        })
+        Vue.component("my-b",{
+            template:"<p>my-b组件</p>"
+        })
+        new Vue({
+            el:"#app",
+            data:{
+                comp:"my-a"
+            }
+        })
+    </script>
+</body>
+</html>

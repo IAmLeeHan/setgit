@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<style>
+    .red {
+        background: red;
+    }
+
+    .blue {
+        background: blue;
+    }
+
+    .yellow {
+        background: yellow;
+    }
+
+    .small {
+        font-size: 2em;
+    }
+
+    .big {
+        font-size: 4em;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <!-- <p :class= "{red:true,big:isBig}">发把客户发</p> -->
+        <p :class= "['red',(isBig?'big':'')]">发把客户发</p>
+        <div>
+            <button 
+                :class = "['btn','btn-'+(activeIndex === btn.id?'danger':'default')]"
+                v-for = "btn in btns"
+                :key = "btn.id"
+                @click = "activeIndex = btn.id"
+            >{{btn.title}}</button>
+        </div>
+    </div>
+    <script src="js/vue.js"></script>
+
+
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                isBig:true,
+                activeIndex:1,
+                btns:[
+                    {id:1,title:"btn1"},
+                    {id:2,title:"btn2"},
+                    {id:3,title:"btn3"}
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <father></father>
+    </div>
+
+    <template id="father">
+        <div class="father">
+            <p>我是father</p>
+            <hr>
+            <son :num="num"></son>
+        </div>
+    </template>
+   
+    <template id="son">
+        <div class="son">
+            <p>我是son====> {{num+1}}</p>
+        </div>
+    </template>
+</body>
+<script src="./base/vue.js"></script>
+
+<script>
+    // props的值可以是对象，在里面可以对父组件传过来的数据做出验证，
+    //如果验证失败，会抛出警告
+
+
+    //如果子组件没有通过props来接收父组件传递的某个数据，
+    //改属性就会出现在子组件模板的最外层节点上面
+
+    new Vue({
+        el:"#app",
+        components:{
+            father:{
+                template:"#father",
+                data(){
+                    return {
+                        num:40
+                    }
+                },
+                components:{
+                    son:{
+                        template:"#son",
+                        //props:["num"]  希望接受到的值，并且可以对其进行验证
+                        props:{
+                            //num:[Number,String] 
+                            // num:{
+                            //     default:1000
+                            // }
+                            num:{
+                                type:Number,
+                                validator(val){
+                                    return val>5
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    })
+    
+</script>
+</html>

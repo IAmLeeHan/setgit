@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "app">
+        <p>
+            <div>
+                <table>
+                    <tr is = "m-hello"></tr>
+                </table>
+            </div>
+        </p>
+    </div>
+    <script src = "js/vue.js"></script>
+    <script>
+        /* 
+            因为vue在解析模板的时候会根据某些html的规则，
+            例如，在table里只能放置tr、td、th。。。
+            如果放入组件不会解析，
+            放入tr标签使用is方式，
+            代表tr标签引入的是一个组件
+        */
+        
+        new Vue({
+            el:"#app",//挂载点
+            components:{
+                "m-hello":{
+                    template:"<h3>我是h5标签</h3>"
+                }
+            }
+            
+        })
+        
+    </script>
+</body>
+</html>

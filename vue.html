@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "app">
+        <input type="text" v-model = "msg">
+        {{msg}}
+    </div>
+    <script src = "js/vue.js"></script>
+    <script>
+        // 每个应用都是从创建一个实例开始
+        // 每个应用起码得来一个实例
+        new Vue({
+            el:"#app",//挂载点
+            data:{
+                msg:"hello world"
+            }
+        })
+        // vue中才用了MVVM模式 
+        /* mvvm主要是解决了什么问题？
+        解决了反馈不及时的问题，或者实现了自动同步的功能； */
+    </script>
+</body>
+</html>

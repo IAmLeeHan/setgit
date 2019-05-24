@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "app">
+        <father></father>
+        <hr>
+        <!-- <father></father> -->
+    </div>
+    <template id= "father">
+        <div>
+            <p>我是父组件</p>
+            <p>{{fMsg}}</p>
+            <input type="text" v-model = "fMsg">
+            <son :f-msg = "fMsg"></son>
+        </div>
+    </template>
+    <script src = "js/vue.js"></script>
+    <script>
+        Vue.component("father",{
+            template:"#father",
+            data(){ //必须用函数的形式去声明这个数据
+                    //(否则复用时会产生不必要的bug)，内部返回对象
+                return {
+                    fMsg:"hello world"
+                }
+            },
+            components:{
+                son:{
+                    template:"<div>我是子组件！{{fMsg}}</div>",
+                    props:["fMsg"]//接受父组件传递过来的f-msg属性
+                }
+            }
+        })
+        new Vue({
+            el:"#app",//挂载点
+            data:{
+                msg:"hello world"
+            }
+        })
+        
+    </script>
+</body>
+</html>

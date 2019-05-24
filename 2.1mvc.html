@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    
+    
+    <div id="box">
+        <button class="btn">toggle</button>
+        <button class="btn2">big</button>
+        <div class="box">
+
+        </div>
+    </div>
+
+
+    <script src="./base/vue.min.js"></script>
+    <script>
+        //mvc的设计模式 设计项目逻辑
+        //[https://blog.csdn.net/victoryzn/article/details/78392128]
+        //[http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html]
+
+        /*
+            mvc:
+                m：model   v：view   c:controller
+                c的作用就是将m层的数据在v层进行显示
+
+            vue是一个mvvm的框架，核心关注v层
+        
+        */
+        //m层
+        let model = {
+            isShow: true,
+            isBig: true
+        }
+        //v层
+        let boxDom = document.getElementsByClassName("box")[0];
+        //c层
+        function Controller(){
+            this.init();
+        }
+        
+        Controller.prototype = {
+            init(){
+                this.addEvent();
+            },
+            addEvent(){
+                let btn = document.getElementsByClassName("btn")[0];
+                let btn2 = document.getElementsByClassName("btn2")[0];
+                //var that = this;
+                btn.onclick = ()=>{
+                    model.isShow = !model.isShow;
+                    //重新渲染视图
+                    this.render();
+                }
+                btn2.onclick = ()=>{
+                    this.render()
+                }
+            },
+            render(){
+                boxDom.style.display = model.isShow?"block":"none";
+                boxDom.style.width = model.isBig?"500px":"100px"
+            }
+        }
+
+
+        new Controller();
+
+
+
+        //面向过程的！
+        // let btnDom = document.getElementsByClassName("btn")[0];
+        // let boxDom = document.getElementsByClassName("box")[0];
+        // let flag = true;
+        // btnDom.onclick = function(){
+        //     if(flag){
+        //         boxDom.style.display = "none"
+        //         flag = false;
+        //     }else{
+        //         boxDom.style.display = "block"
+        //         flag = true;
+        //     }
+        // }
+    </script>
+</body>
+</html>

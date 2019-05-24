@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "app">
+        <button @click = "get">get</button>
+        <ul>
+            <li v-for = "book in books" :key = "book.id">{{book.title}}</li>
+        </ul>
+    </div>
+    <script src = "js/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.3.5/vue-resource.min.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                books:null
+            },
+            methods: {
+                get(){
+                   this.$http.get("./json/temp.json").then(res=>{
+                       console.log(res.body.books)
+                       this.books = res.body.books
+                   }) 
+                }
+            },
+        })
+    </script>
+</body>
+</html>
