@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <link rel="stylesheet" href="./base/animate.css"> -->
+    <title>Document</title>
+</head>
+<style>
+    .box{
+        width: 200px;
+        height: 200px;
+        background: red;
+    }
+    .abc-enter{/*进入开始的时候*/
+        opacity: 0;
+    }
+    .abc-enter-to{/*进入结束的时候*/
+        opacity: 1;
+    }
+    .abc-enter-active,.abc-leave-active{/*进入开始到离开结束的整个过程*/
+        transition: all 2S;
+    }
+    .abc-leave{/*离开开始的时候*/
+        opacity: 0;
+    }
+    .abc-leave-to{/*离开结束的时候*/
+        opacity: 0;
+    }
+</style>
+<body>
+    <div id="app">
+        <aaa></aaa>
+    </div>
+    <template id="aaa">
+        <div>   
+            <button @click = "toggle">toggle</button>
+            <transition name = "abc">
+                <div class="box" v-if="isShow"></div>
+            </transition>
+        </div>
+    </template>
+
+
+
+
+
+</body>
+<script src="./js/vue.js"></script>
+
+<script>
+
+    //transition组件主要的作用就是可以给元素在某些特定的时刻添加上特定的类名
+    //transition  template 不会被渲染出来
+    Vue.component("aaa",{
+        template:"#aaa",
+        data(){
+            return{
+                isShow:false
+            }
+        },
+       methods: {
+           toggle(){
+            this.isShow =  ! this.isShow
+           }
+       },
+    })
+
+    new Vue({
+        el:"#app"
+    })
+
+
+    
+
+
+
+</script>
+</html>
