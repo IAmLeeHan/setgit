@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       <aaa></aaa>
+    </div>
+    <template id="aaa">  
+        <div>
+            <button @click = "get">get</button>
+            <bbb ref = "b"></bbb>  
+            <!-- this.$refs.b.message = "hello world" -->
+        </div>
+    </template>
+    <template id="bbb">
+        <div>
+            <input type="text" v-model="message">
+        </div>
+    </template>
+
+</body>
+<script src="./js/vue.js"></script>
+
+<script>
+
+    //组件间不仅可以用过$root/$parent/$children来获取对应关系的组件，
+    //父组件还可以主动的通过ref为子组件做标记  也可以给dom做标记
+    //也会形成ref链，也可以交互，
+    //注意多个子组件标记的是同一个键名，获取到的应该是一个数组
+
+
+    Vue.component("bbb",{
+        template:"#bbb",
+        data(){
+            return {
+                message:"hello"
+            }
+        }
+    })
+
+    Vue.component("aaa",{
+        template:"#aaa",
+        methods: {
+            get(){
+                // this.$children[0].message = "我是你爸爸"
+                this.$refs.b.message = "我是你的爸爸"
+            }
+        },
+    })
+
+    new Vue({
+        el:"#app"
+    })
+
+
+    
+
+
+
+</script>
+</html>
