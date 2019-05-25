@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <father></father>
+    </div>
+    <template id="father">
+        <div>
+            <p>这是父组件</p>
+            <p>这是我儿子要和我说的话 ===> {{parentMsg}}</p>
+            <hr>
+            <son @change = "change"></son>  
+        </div>
+    </template>
+    <template id="son">
+        <div>
+            <p>这是子组件</p>
+            <p @click = "changeWord">这是我要跟父亲说的话 ===> {{word}}</p>
+        </div>
+    </template>
+</body>
+<script src="./js/vue.js"></script>
+
+<script>
+    Vue.component("father", {
+        template: "#father",
+        data(){
+            return {
+                parentMsg:''
+            }
+        },
+        methods: {
+            change(word){
+                return this.parentMsg = word;
+            }
+        },
+        
+    })
+    Vue.component("son", {
+        template: "#son",
+        // props:["change"],
+        data() {
+            return {
+                word: "hello!!!"
+            }
+        },
+        methods:{
+            changeWord(){
+                this.$emit("change",this.word)
+            }
+        }
+    })
+    new Vue({
+        el: "#app"
+    })
+
+</script>
+
+</html>
