@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css">
+</head>
+<body>
+    <div id="app">
+        <button @click="type='aaa'">A</button>
+        <button @click="type='bbb'">B</button>
+        <transition
+            enter-active-class="animated slideInRight"
+            leave-active-class="animated slideOutRight"
+            mode = "out-in"
+        >
+            <component :is="type"></component>
+        </transition>
+    </div>
+</body>
+<script src="./js/vue.js"></script>
+
+<script>
+    // 利用component标签来代替某一个组件，设置is属性为真正组件的名字
+    //transition组件默认是进入和离开同时发生。
+     //vue中对于transition提供了过渡模式
+    //  in-out：新元素先进行过渡，完成之后当前元素过渡离开。
+    // out-in：当前元素先进行过渡，完成之后新元素过渡进入。
+
+    new Vue({
+        el:"#app",
+        data:{
+            type:"aaa"
+        },
+        components:{
+            "aaa":{
+                template:"<h1>AAAAAAAAAAAAA</h1>"
+            },
+            "bbb":{
+                template:"<h2>BBBBBBBBBBBBB</h2>"
+            }
+        }
+    })
+
+</script>
+</html>
