@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <my-btn></my-btn>
+        <hr>
+        <my-btn>
+            <div  slot = "s1">
+                <p>我是p标签</p>
+                <img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3178059949,3021100917&fm=85&app=57&f=JPEG?w=121&h=75&s=6893619C42E230AC8719318E03003080" alt="">
+            </div>
+        </my-btn>
+    </div>
+
+   
+
+    <template id="my-btn">
+        <div class="my-btn">
+            <h3>wishing my-btn组件</h3>
+            <slot name = "s1"></slot>
+        </div>
+    </template>
+
+
+
+</body>
+<script src="./js/vue.js"></script>
+
+<script>
+
+   //具名槽口
+   //slot上面通过name属性指定槽口名称
+   //然后使用的时候通过slot="槽口名称"
+
+    Vue.component("my-btn",{
+        template:"#my-btn"
+    })
+   
+
+    new Vue({
+        el:"#app",
+    })
+
+
+    
+
+
+
+</script>
+</html>
