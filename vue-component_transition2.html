@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/animate.css">
+    <title>Document</title>
+</head>
+<style>
+    .box{
+        width: 200px;
+        height: 200px;
+        background: red;
+        /* margin-left:10px;
+        float: left; */
+    }
+    /* 定义一个关键帧 */
+    /* 兼容写在@与keyframes之间 例：@-webkit-keyframes */
+    @keyframes abc{
+        0%{
+            width:20px;
+        }
+        30%{
+            width:120px;
+        }
+        70%{
+            width:30px;
+        }
+        100%{
+            width:10px;
+        }
+    }
+    /* 调用关键帧 */
+    .abc{
+        animation-name:abc;
+    }
+</style>
+<body>
+    <div id="app">
+        <aaa></aaa>
+    </div>
+    <template id="aaa">
+        <div>   
+            <button @click = "toggle">toggle</button>
+            <!-- <transition-group name = "abc">
+                <div :key = "1" class="box" v-if="isShow"></div>
+                <div :key = "2" class="box" v-if="isShow"></div>
+                <div :key = "3" class="box" v-if="isShow"></div>
+            </transition-group> -->
+            <transition
+                enter-active-class="animated abc"
+                leave-active-class="animated bounceOutRight"
+            >
+                <div class = "box" v-if="isShow"></div>
+            </transition>
+        </div>
+    </template>
+
+
+
+
+
+</body>
+<script src="./js/vue.js"></script>
+
+<script>
+
+    //transition组件主要的作用就是可以给元素在某些特定的时刻添加上特定的类名
+    //transition  template 不会被渲染出来
+    Vue.component("aaa",{
+        template:"#aaa",
+        data(){
+            return{
+                isShow:false
+            }
+        },
+       methods: {
+           toggle(){
+            this.isShow =  ! this.isShow
+           }
+       },
+    })
+
+    new Vue({
+        el:"#app"
+    })
+
+
+    
+
+
+
+</script>
+</html>
