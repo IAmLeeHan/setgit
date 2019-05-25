@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css">
+</head>
+<body>
+    <div id="app">
+       <king></king>
+    </div>
+
+
+    <template id="king">
+        <div>
+          <p>我是国王~~</p>
+          <p>国库：{{gk}}</p>
+          <p>下面是我的子民们..</p>
+          <hr>
+          <pi @_give = "addMoney"></pi>
+        </div>
+    </template>
+
+
+    <template id="pi">
+        <div>
+           <p>我是伟大国王的子民</p>
+           <input type="number" v-model="money">
+           <p><button @click = "jg">进贡</button></p>
+        </div>
+    </template>
+
+</body>
+<script src="./js/vue.js"></script>
+
+<script>
+    //屁民
+    Vue.component('pi',{
+        template: '#pi',
+        // props:["_give"],
+        data(){
+            return {
+                money:0
+            }
+        },
+        methods:{
+            jg(){
+                this.money /= 2;
+                // this._give(this.money)
+                this.$emit("_give",this.money)
+            }
+        }
+        
+    })
+    //国王
+    Vue.component('king',{
+        template: '#king',
+        data(){
+            return {
+                gk:0
+            }
+        },
+        methods: {
+            addMoney(money){
+                this.gk += money;
+            }
+        }
+    })
+
+    
+    new Vue({
+        el:"#app"
+    })
+
+
+</script>
+</html>
