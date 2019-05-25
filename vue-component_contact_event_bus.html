@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css">
+</head>
+<body>
+    <div id="app">
+        <big-brother></big-brother>
+        <hr>
+        <littel-brother></littel-brother>
+    </div>
+
+
+    <template id="big-brother">
+        <div>
+            <p>我是哥哥</p>
+            <button @click = "hit">打弟弟</button>
+        </div>
+    </template>
+
+
+    <template id="littel-brother">
+        <div>
+            <p>我是弟弟</p>
+            <p v-if="crying">嘤嘤嘤~</p>
+        </div>
+    </template>
+
+</body>
+<script src="./js/vue.js"></script>
+
+<script>
+
+    //实现兄弟组件之间的通信
+    // 1.viewmodel+ref链可以实现此通信。 2.event bus事件总线
+    //创建一个空的实例，  event-bus 事件总线  绑定事件与触发事件的过程
+    //创建vue对象  var angle = new Vue()
+    //B组件绑定一个自定义事件，第二个参数为需要处理的函数
+    //angle.$on("自定义事件名",this.cry)
+    //A组件要执行B组件的事件名，就可以让B组件自己去执行cry的方法  
+    //angel.$emit("自定义事件名")
+
+
+    //父 ==> 子  props
+    //子 ==> 父  父亲把自己的一个方法传递给子组件   事件触发 @change123="change"   this.$emit("change123")
+    
+    
+    var angle = new Vue();
+    Vue.component('big-brother', {
+        template: '#big-brother',
+       methods: {
+           hit(){
+            angle.$emit("hit-little")
+           }
+       },
+    })
+    Vue.component('littel-brother', {
+        template: '#littel-brother',
+        methods:{
+            cry(){
+                this.crying = true;
+            }
+        },
+        data(){
+            return{
+                crying:false
+            }
+        },
+        mounted() {//生命周期函数 初始化时就开始加载
+            angle.$on("hit-little",this.cry)
+        },
+    })
+    new Vue({
+        el:"#app"
+    })
+
+
+</script>
+</html>
